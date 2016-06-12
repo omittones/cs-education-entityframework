@@ -3,7 +3,7 @@
 namespace Zoo.API.Controllers
 {
     [RoutePrefix("api")]
-    public class TestController : ApiController
+    public class RootController : ApiController
     {
         [HttpGet]
         [Route("version")]

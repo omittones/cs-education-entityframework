@@ -7,7 +7,7 @@ namespace Zoo.API
     {
         public static void Main(string[] args)
         {
-            using (WebApp.Start<Startup>("http://localhost:8080"))
+            using (WebApp.Start<Startup>("http://localhost:8888"))
             {
                 while (Console.ReadLine() != "quit") ;
             }

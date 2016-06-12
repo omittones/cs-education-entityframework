@@ -1,6 +1,7 @@
 ﻿using System.Web.Http;
 using Microsoft.Owin.Logging;
 using Owin;
+using Zoo.API.Configuration;
 
 namespace Zoo.API
 {
@@ -17,9 +18,7 @@ namespace Zoo.API
         {
             this.log.WriteWarning("Configuration started");
 
-            var httpConfig = new HttpConfiguration();
-            httpConfig.MapHttpAttributeRoutes();
-            builder.UseWebApi(httpConfig);
+            ApiModule.Configure(builder);
 
             this.log.WriteWarning("Configuration finished");
         }
