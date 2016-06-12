@@ -1,0 +1,12 @@
+{
+ "folders": [
+  {
+   "folder_exclude_patterns": [
+    "bin",
+    "obj",
+    "packages"
+   ],
+   "path": "."
+  }
+ ]
+}
