@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using Fasterflect;
 
-namespace Zoo.Entity.Log
+namespace Zoo.Test.Log
 {
     public class LoggerHelper
     {

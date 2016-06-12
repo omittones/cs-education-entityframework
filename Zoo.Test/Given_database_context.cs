@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Data.Entity;
-using Zoo.Entity.Log;
-using Zoo.Entity.Model;
 using Xunit.Abstractions;
+using Zoo.Entity.Model;
+using Zoo.Test.Log;
 
-namespace Zoo.Entity
+namespace Zoo.Test
 {
     public class Given_database_context : IDisposable
     {

@@ -1,4 +1,4 @@
-namespace Zoo.Entity.Log
+namespace Zoo.Test.Log
 {
     public interface ILogger
     {

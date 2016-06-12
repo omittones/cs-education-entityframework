@@ -1,6 +1,6 @@
 using Xunit.Abstractions;
 
-namespace Zoo.Entity.Log
+namespace Zoo.Test.Log
 {
     public class XUnitLogger : ILogger
     {

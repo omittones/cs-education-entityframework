@@ -3,7 +3,7 @@ using System.Reflection;
 using log4net;
 using log4net.Config;
 
-namespace Zoo.Entity.Log
+namespace Zoo.Test.Log
 {
     public static class Logger
     {

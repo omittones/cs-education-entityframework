@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
-using Zoo.Entity.Model;
-using Should;
 using Xunit;
+using Zoo.Entity.Model;
 
-namespace Zoo.Entity
+namespace Zoo.Test
 {
     public class Given_generic_expression : Given_entities_context
     {
@@ -30,7 +29,7 @@ namespace Zoo.Entity
                 .Where(predicate)
                 .FirstOrDefault();
 
-            employee.ShouldBeNull();
+            Assert.Null(employee);
         }
 
         [Fact(Skip = "not now")]
@@ -44,7 +43,7 @@ namespace Zoo.Entity
                     .Where(predicate)
                     .FirstOrDefault();
 
-                employee.ShouldBeNull();
+                Assert.Null(employee);
             });
         }
     }

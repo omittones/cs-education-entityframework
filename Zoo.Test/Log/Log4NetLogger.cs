@@ -1,6 +1,6 @@
 using log4net;
 
-namespace Zoo.Entity.Log
+namespace Zoo.Test.Log
 {
     public sealed class Log4NetLogger : ILogger
     {

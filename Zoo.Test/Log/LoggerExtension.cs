@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Zoo.Entity.Log
+namespace Zoo.Test.Log
 {
     public static class LoggerExtension
     {

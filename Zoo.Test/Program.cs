@@ -6,7 +6,7 @@ using Xunit;
 
 [assembly: TestFramework(Framework.TypeName, Framework.AssemblyName)]
 
-namespace Zoo.Entity
+namespace Zoo.Test
 {
     public static class Program
     {

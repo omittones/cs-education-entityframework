@@ -1,7 +1,7 @@
 using System;
 using System.Data.Entity;
 
-namespace Zoo.Entity.Log
+namespace Zoo.Test.Log
 {
     public class CountingDatabaseLogger : IDisposable
     {
