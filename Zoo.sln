@@ -3,14 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Educ.Entity", "Educ.Entity\Educ.Entity.csproj", "{9FCC7F7D-E614-4D84-834B-2831CDCBE03F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zoo.Entity", "Zoo.Entity\Zoo.Entity.csproj", "{9FCC7F7D-E614-4D84-834B-2831CDCBE03F}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{8F569A8F-1A58-4A58-8A35-4CCF4C6D756D}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\packages.config = .nuget\packages.config
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Educ.Database", "Educ.Database\Educ.Database.csproj", "{BA76A10C-0397-49A8-804A-1573ADCCEA31}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zoo.Database", "Zoo.Database\Zoo.Database.csproj", "{BA76A10C-0397-49A8-804A-1573ADCCEA31}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
