@@ -3,4 +3,5 @@
 bin
 obj
 packages
-/Educ.Database/00_backups/mig.*
+/Zoo.Database/00_backups/mig.*
+*.sublime-workspace
