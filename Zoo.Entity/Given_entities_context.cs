@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Zoo.Entity.Log;
 using Zoo.Entity.Model;
-using Zoo.Entity.Model.Maps;
-using Should;
 using Xunit;
 
 namespace Zoo.Entity
@@ -40,12 +35,12 @@ namespace Zoo.Entity
             context.Set<Employee>().Add(employee);
             context.SaveChanges();
 
-            var zoo = context.Set<Zoo>().Create();
+            var zoo = context.Set<Model.Zoo>().Create();
             zoo.Id = 1;
             zoo.Name = "Zoomanity";
             zoo.Animals = new List<Animal>();
             zoo.Keepers = new List<ZooKeeper>();
-            context.Set<Zoo>().Add(zoo);
+            context.Set<Model.Zoo>().Add(zoo);
 
             var closedZoo = context.Set<ClosedZoo>().Create();
             closedZoo.Id = 2;
@@ -86,14 +81,14 @@ namespace Zoo.Entity
             weasel.NoLairs = 1;
             weasel.Owner = null;
             weasel.DateOfBirth = DateTime.Now;
-            weasel.Zoos = new List<Zoo>();
+            weasel.Zoos = new List<Model.Zoo>();
             context.Set<Weasel>().Add(weasel);
             context.SaveChanges();
 
             var ferret = context.Set<Ferret>().Create();
             ferret.Owner = null;
             ferret.DateOfBirth = DateTime.Now;
-            ferret.Zoos = new List<Zoo>();
+            ferret.Zoos = new List<Model.Zoo>();
             ferret.FurValue = 1002.2F;
             context.Set<Ferret>().Add(ferret);
             context.SaveChanges();
@@ -101,7 +96,7 @@ namespace Zoo.Entity
             var marten = context.Set<Marten>().Create();
             marten.Owner = null;
             marten.DateOfBirth = DateTime.Now;
-            marten.Zoos = new List<Zoo>();
+            marten.Zoos = new List<Model.Zoo>();
             marten.FurValue = 2010.4F;
             marten.FurColor = "marten-red";
             context.Set<Marten>().Add(marten);
@@ -113,7 +108,7 @@ namespace Zoo.Entity
             ape.Trainer = employee;
             ape.Weight = 110.4;
             ape.Owner = user;
-            ape.Zoos = new List<Zoo> { zoo };
+            ape.Zoos = new List<Model.Zoo> { zoo };
             context.Set<Ape>().Add(ape);
             context.SaveChanges();
 
@@ -175,7 +170,7 @@ namespace Zoo.Entity
 
             this.log.ToInfo().H3("All_animals_should_work");
 
-            var zoos = (from x in context.Set<Zoo>()
+            var zoos = (from x in context.Set<Model.Zoo>()
                 select new
                 {
                     x.Id,

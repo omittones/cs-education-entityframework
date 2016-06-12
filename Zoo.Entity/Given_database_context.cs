@@ -14,7 +14,7 @@ namespace Zoo.Entity
         protected readonly CountingDatabaseLogger databaseTracker;
 
         public Given_database_context(
-            ITestOutputHelper testoutput = null,
+            ITestOutputHelper output = null,
             bool recreate = false)
         {
             if (recreate)
@@ -26,12 +26,12 @@ namespace Zoo.Entity
                 Database.SetInitializer<Context>(null);
             }
 
-            if (testoutput != null)
-                this.log = new XUnitLogger(testoutput);
+            if (output != null)
+                this.log = new XUnitLogger(output);
             else
                 this.log = Logger.Root();
 
-            this.context = Context.Connect("EducEntity");
+            this.context = Context.Connect("cs-sample-zoo");
             this.transaction = this.context.Database.BeginTransaction(isolationLevel: System.Data.IsolationLevel.Serializable);
             this.databaseTracker = new CountingDatabaseLogger(this.context, this.log.ToDebug());
         }

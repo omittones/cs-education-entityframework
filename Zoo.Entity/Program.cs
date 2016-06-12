@@ -1,16 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
 using System.Diagnostics;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using Zoo.Entity.XUnit;
-using Should;
+using InheritBDD.xUnit;
 using Xunit;
 
-[assembly: TestFramework("Zoo.Entity.XUnit.BDDFramework", "Zoo.Entity")]
+[assembly: TestFramework(Framework.TypeName, Framework.AssemblyName)]
 
 namespace Zoo.Entity
 {
