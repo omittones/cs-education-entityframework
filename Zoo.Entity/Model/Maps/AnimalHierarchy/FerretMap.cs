@@ -10,7 +10,7 @@ namespace Zoo.Entity.Model.Maps.AnimalHierarchy
             {
                 m.ToTable("Animal");
                 m.Requires("Type").HasValue((int) AnimalType.Ferret);
-                m.Properties(t => new { });
+                m.PropertiesWithFixedNullMembers(t => new { });
             });
 
             Map(m =>

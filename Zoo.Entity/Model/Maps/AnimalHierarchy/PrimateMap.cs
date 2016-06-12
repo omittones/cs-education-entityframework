@@ -21,7 +21,7 @@ namespace Zoo.Entity.Model.Maps.AnimalHierarchy
             {
                 m.ToTable("Animal");
                 m.Requires("Type").HasValue((int) AnimalType.Primate);
-                m.Properties(t => new { });
+                m.PropertiesWithFixedNullMembers(t => new { });
             });
 
             this.Map(m =>

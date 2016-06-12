@@ -10,7 +10,7 @@ namespace Zoo.Entity.Model.Maps.BirdHierarchy
             {
                 m.ToTable("Birds");
                 m.Requires("Type").HasValue("HawkMouseHunter");
-                m.Properties(e => new { });
+                m.PropertiesWithFixedNullMembers(e => new { });
             });
 
             HasRequired(e => e.Details)

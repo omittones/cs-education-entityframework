@@ -129,6 +129,7 @@
     <Compile Include="Model\Chimpanzee.cs" />
     <Compile Include="Model\Maps\AnimalHierarchy\PrimateHierarchy\ChimpanzeeMap.cs" />
     <Compile Include="Model\Dependent.cs" />
+    <Compile Include="Model\Maps\MapHelper.cs" />
     <Compile Include="Model\Maps\ReqsHierarchy\DependentMap.cs" />
     <Compile Include="Model\Maps\ReqsHierarchy\ReqTwoMap.cs" />
     <Compile Include="Model\Maps\ReqsHierarchy\ReqOneMap.cs" />
