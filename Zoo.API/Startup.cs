@@ -1,5 +1,4 @@
-﻿using System.Web.Http;
-using Microsoft.Owin.Logging;
+﻿using Microsoft.Owin.Logging;
 using Owin;
 using Zoo.API.Configuration;
 

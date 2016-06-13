@@ -37,8 +37,8 @@ namespace Zoo.API.Configuration
             HttpConfiguration config,
             Type entityType)
         {
-            return new HttpControllerDescriptor(config, entityType.Name + "Controller",
-                typeof (DefaultController<>).MakeGenericType(entityType));
+            return new HttpControllerDescriptor(config, (entityType.Name + "Controller").ToLower(),
+                typeof (DefaultController<,>).MakeGenericType(entityType, entityType));
         }
 
         public HttpControllerDescriptor SelectController(HttpRequestMessage request)

@@ -3,14 +3,22 @@ using Zoo.API.Domain;
 
 namespace Zoo.API.Controllers
 {
+    public class DefaultController<TModel> : DefaultController<TModel, TModel>
+    {
+        public DefaultController(IService<TModel> service, IQuery<GridRequest, TModel> query) :
+            base(service, query)
+        {
+        }
+    }
+
     public class DefaultController<TWriteModel, TReadModel> : ApiController
     {
         private readonly IService<TWriteModel> service;
-        private readonly IQuery<TReadModel> query;
+        private readonly IQuery<GridRequest, TReadModel> query;
 
         public DefaultController(
             IService<TWriteModel> service,
-            IQuery<TReadModel> query)
+            IQuery<GridRequest, TReadModel> query)
         {
             this.service = service;
             this.query = query;
@@ -54,15 +62,6 @@ namespace Zoo.API.Controllers
             var read = this.query.ResolveOne(id);
 
             return Ok(read);
-        }
-    }
-
-    public class DefaultController<TModel> : DefaultController<TModel, TModel>
-    {
-        public DefaultController(
-            IService<TModel> service,
-            IQuery<TModel> query) : base(service, query)
-        {
         }
     }
 }

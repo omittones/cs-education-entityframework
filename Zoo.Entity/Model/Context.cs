@@ -27,7 +27,7 @@ namespace Zoo.Entity.Model
 
             if (clean)
             {
-                var sql = string.Format("ALTER DATABASE {0} SET SINGLE_USER WITH ROLLBACK IMMEDIATE;", context.Database.Connection.Database);
+                var sql = $"ALTER DATABASE {context.Database.Connection.Database} SET SINGLE_USER WITH ROLLBACK IMMEDIATE;";
                 context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, sql);
                 context.Database.Delete();
                 context.Database.Create();

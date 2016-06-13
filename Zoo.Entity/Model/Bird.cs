@@ -1,7 +1,6 @@
 ﻿namespace Zoo.Entity.Model
 {
-    public abstract class Bird
+    public abstract class Bird : Root
     {
-        public int Id { get; set; }
     }
 }

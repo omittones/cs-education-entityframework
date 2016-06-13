@@ -1,14 +1,16 @@
-﻿using System;
-using System.Web.Http;
-using System.Web.Http.Dispatcher;
+﻿using System.Web.Http;
 using Owin;
+using Autofac;
+using Autofac.Integration.WebApi;
 
 namespace Zoo.API.Configuration
 {
     public static class ApiModule
     {
-        public static IDisposable Configure(IAppBuilder app)
+        public static void Configure(IAppBuilder app)
         {
+            var builder = new ContainerBuilder();
+
             var config = new HttpConfiguration();
 
             config.MapHttpAttributeRoutes();
@@ -20,18 +22,34 @@ namespace Zoo.API.Configuration
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new {id = RouteParameter.Optional});
 
-            config.Services.Replace(typeof (IHttpControllerSelector), new ControllerSelector(
-                new[]
-                {
-                    typeof (Entity.Model.Zoo),
-                    typeof (Entity.Model.Employee),
-                    typeof (Entity.Model.User),
-                    typeof (Entity.Model.Animal)
-                }, config));
+            builder.RegisterModule(new ZooModule());
 
+            builder.Register(c => new ControllerSelector(new[]
+            {
+                typeof (Entity.Model.Animal),
+                typeof (Entity.Model.Zoo),
+                typeof (Entity.Model.Employee),
+                typeof (Entity.Model.User),
+                typeof (Entity.Model.Bird),
+                typeof (Entity.Model.Cage)
+            }, config))
+                .AsImplementedInterfaces()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<ControllerActivator>()
+                .AsImplementedInterfaces()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterWebApiFilterProvider(config);
+            builder.RegisterWebApiModelBinderProvider();
+
+            var container = builder.Build();
+
+            config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+
+            app.UseAutofacMiddleware(container);
+            app.UseAutofacWebApi(config);
             app.UseWebApi(config);
-
-            return config;
         }
 
         private static void ConfigureFormatters(HttpConfiguration config)

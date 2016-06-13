@@ -1,9 +1,7 @@
 namespace Zoo.Entity.Model
 {
-    public class Cage
+    public class Cage : Root
     {
-        public int Id { get; set; }
-
         public string NoBars { get; set; }
 
         public double TensileStrength { get; set; }

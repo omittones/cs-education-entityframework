@@ -45,7 +45,7 @@
   <Class Name="Zoo.Entity.Model.Animal">
     <Position X="16" Y="7" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAACAACAAAAAAABAAAAAAAAAAAAQAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAACAAAAAAABAAAAAAAAAAAAQAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Model\Animal.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -59,7 +59,7 @@
   <Class Name="Zoo.Entity.Model.Cage">
     <Position X="15.75" Y="4.75" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAgAAAAAAAAAAARAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAgAAAAAAAAAAARAAAAAAAAAAAAABAAAAAAAA=</HashCode>
       <FileName>Model\Cage.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -94,14 +94,6 @@
       <FileName>Model\Primate.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Zoo.Entity.Model.Root">
-    <Position X="10" Y="3" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Model\Root.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
   <Class Name="Zoo.Entity.Model.User">
     <Position X="12.25" Y="4.75" Width="1.75" />
     <TypeIdentifier>
@@ -119,7 +111,7 @@
   <Class Name="Zoo.Entity.Model.Zoo">
     <Position X="4.25" Y="9" Width="2.75" />
     <TypeIdentifier>
-      <HashCode>QAACAAAAAAAAAAAAAAAQAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>QAAAAAAAAAAAAAAAAAAQAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Model\Zoo.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -190,7 +182,7 @@
   <Class Name="Zoo.Entity.Model.Bird">
     <Position X="4.5" Y="11.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Model\Bird.cs</FileName>
     </TypeIdentifier>
   </Class>

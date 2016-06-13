@@ -1,15 +1,14 @@
 ﻿using System;
-using System.Linq;
 using Zoo.Entity.Model;
 
-namespace Zoo.API.Domain.Default
+namespace Zoo.API.Domain
 {
-    public class SimpleService<TModel> : IService<TModel>
-        where TModel : class, IIdentifiable
+    public class DefaultService<TModel> : IService<TModel>
+        where TModel : Root
     {
         private readonly Context context;
 
-        public SimpleService(Context context)
+        public DefaultService(Context context)
         {
             this.context = context;
         }
@@ -21,7 +20,7 @@ namespace Zoo.API.Domain.Default
             if (entity == null)
                 throw new ArgumentException($"{typeof (TModel).Name} with Id={id} not found!", nameof(id));
 
-            //TODO - map to original
+            AutoMapper.Mapper.Map(model, entity);
 
             this.context.SaveChanges();
         }
