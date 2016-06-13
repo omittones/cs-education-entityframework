@@ -65,7 +65,7 @@ namespace Zoo.API.Domain.Queries
                         Id = m.Id,
                         Name = m.Name + " " + m.Surrname,
                         NoKeys = m.NoKeys
-                    }).ToArray(),
+                    }),
                     Admin = new EmployeeView
                     {
                         Id = admin.Id,

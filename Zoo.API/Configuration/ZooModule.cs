@@ -36,6 +36,10 @@ namespace Zoo.API.Configuration
             builder.RegisterType<ZooQuery>()
                 .InstancePerLifetimeScope()
                 .AsImplementedInterfaces();
+
+            builder.RegisterType<ZooController>()
+                .InstancePerLifetimeScope()
+                .AsSelf();
         }
     }
 }

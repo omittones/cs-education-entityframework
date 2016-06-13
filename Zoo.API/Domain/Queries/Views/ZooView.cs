@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Zoo.API.Domain.Queries.Views
 {
     public class ZooView
@@ -7,6 +9,6 @@ namespace Zoo.API.Domain.Queries.Views
         public int NoKeepers { get; set; }
         public string Name { get; set; }
         public EmployeeView Admin { get; set; }
-        public EmployeeView[] Managers { get; set; }
+        public IEnumerable<EmployeeView> Managers { get; set; }
     }
 }

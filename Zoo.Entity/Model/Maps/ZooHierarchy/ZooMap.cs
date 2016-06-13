@@ -9,12 +9,13 @@ namespace Zoo.Entity.Model.Maps.ZooHierarchy
         {
             HasKey(e => e.Id);
 
-            Property(e => e.Id);
+            Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+
             Property(e => e.Name);
 
             HasMany(e => e.Keepers)
                 .WithRequired()
-                .HasForeignKey(k=>k.ZooId);
+                .HasForeignKey(k => k.ZooId);
         }
     }
 }
