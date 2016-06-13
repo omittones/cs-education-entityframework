@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Zoo.API.Controllers;
 using Zoo.API.Domain;
+using Zoo.API.Domain.Queries;
 using Zoo.Entity.Model;
 
 namespace Zoo.API.Configuration
@@ -16,19 +17,23 @@ namespace Zoo.API.Configuration
                 .AsImplementedInterfaces()
                 .InstancePerLifetimeScope();
 
-            builder.RegisterGeneric(typeof (DefaultController<,>))
+            builder.RegisterGeneric(typeof (DefaultController<,,>))
                 .InstancePerLifetimeScope()
                 .AsSelf();
 
-            builder.RegisterGeneric(typeof(DefaultController<>))
-               .InstancePerLifetimeScope()
-               .AsSelf();
+            builder.RegisterGeneric(typeof (DefaultController<>))
+                .InstancePerLifetimeScope()
+                .AsSelf();
 
             builder.RegisterGeneric(typeof (DefaultService<>))
                 .InstancePerLifetimeScope()
                 .AsImplementedInterfaces();
 
             builder.RegisterGeneric(typeof (DefaultQuery<,>))
+                .InstancePerLifetimeScope()
+                .AsImplementedInterfaces();
+
+            builder.RegisterType<ZooQuery>()
                 .InstancePerLifetimeScope()
                 .AsImplementedInterfaces();
         }

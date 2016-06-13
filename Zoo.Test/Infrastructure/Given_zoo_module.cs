@@ -37,7 +37,7 @@ namespace Zoo.Test.Infrastructure
             var a = this.container.Resolve<DefaultController<Animal>>();
             Assert.NotNull(a);
 
-            var b = this.container.Resolve<DefaultController<Animal, Animal>>();
+            var b = this.container.Resolve<DefaultController<Animal, GridRequest, Animal>>();
             Assert.NotNull(b);
         }
 
