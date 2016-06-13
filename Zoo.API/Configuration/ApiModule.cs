@@ -36,10 +36,6 @@ namespace Zoo.API.Configuration
                 .AsImplementedInterfaces()
                 .InstancePerLifetimeScope();
 
-            builder.RegisterType<ControllerActivator>()
-                .AsImplementedInterfaces()
-                .InstancePerLifetimeScope();
-
             builder.RegisterWebApiFilterProvider(config);
             builder.RegisterWebApiModelBinderProvider();
 
