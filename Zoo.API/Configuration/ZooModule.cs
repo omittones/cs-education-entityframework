@@ -11,7 +11,7 @@ namespace Zoo.API.Configuration
         {
             base.Load(builder);
 
-            builder.Register(c => Context.Connect("cs-sample-zoo"))
+            builder.Register(c => Context.Connect("SampleZoo"))
                 .AsSelf()
                 .AsImplementedInterfaces()
                 .InstancePerLifetimeScope();

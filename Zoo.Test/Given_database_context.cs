@@ -31,7 +31,7 @@ namespace Zoo.Test
             else
                 this.log = Logger.Root();
 
-            this.context = Context.Connect("cs-sample-zoo");
+            this.context = Context.Connect("SampleZoo");
             this.transaction = this.context.Database.BeginTransaction(isolationLevel: System.Data.IsolationLevel.Serializable);
             this.databaseTracker = new CountingDatabaseLogger(this.context, this.log.ToDebug());
         }
