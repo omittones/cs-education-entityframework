@@ -41,7 +41,7 @@ namespace Zoo.Entity.Model
 
         private static Context Create(string db)
         {
-            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+            var builder = new SqlConnectionStringBuilder();
             builder.IntegratedSecurity = true;
             builder.DataSource = "localhost";
             builder.InitialCatalog = db;

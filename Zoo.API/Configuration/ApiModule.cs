@@ -5,13 +5,15 @@ using Owin;
 
 namespace Zoo.API.Configuration
 {
-    public class ApiModule
+    public static class ApiModule
     {
         public static IDisposable Configure(IAppBuilder app)
         {
             var config = new HttpConfiguration();
 
             config.MapHttpAttributeRoutes();
+
+            ConfigureFormatters(config);
 
             config.Routes.MapHttpRoute(
                 name: "Default",
@@ -25,11 +27,20 @@ namespace Zoo.API.Configuration
                     typeof (Entity.Model.Employee),
                     typeof (Entity.Model.User),
                     typeof (Entity.Model.Animal)
-                }));
+                }, config));
 
             app.UseWebApi(config);
 
             return config;
+        }
+
+        private static void ConfigureFormatters(HttpConfiguration config)
+        {
+            var json = config.Formatters.JsonFormatter;
+            var xml = config.Formatters.XmlFormatter;
+            config.Formatters.Remove(xml);
+
+            json.UseDataContractJsonSerializer = false;
         }
     }
 }
