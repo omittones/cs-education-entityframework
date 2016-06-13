@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -10,57 +12,33 @@ using Zoo.API.Controllers;
 
 namespace Zoo.API.Configuration
 {
-    public class ControllerSelector : IHttpControllerSelector
+    public class ControllerSelector : DefaultHttpControllerSelector
     {
         private readonly IList<Type> entityTypes;
-        private readonly HttpConfiguration configuration;
-        private readonly Lazy<IDictionary<string, HttpControllerDescriptor>> controllerMappings;
 
-        public ControllerSelector(IList<Type> entityTypes,
-            HttpConfiguration configuration)
+        public ControllerSelector(IList<Type> entityTypes, HttpConfiguration configuration) : base(configuration)
         {
             this.entityTypes = entityTypes;
-            this.configuration = configuration;
-
-            this.controllerMappings = new Lazy<IDictionary<string, HttpControllerDescriptor>>(
-                InitializeCache);
         }
 
-        private IDictionary<string, HttpControllerDescriptor> InitializeCache()
+        public override HttpControllerDescriptor SelectController(HttpRequestMessage request)
         {
-            return this.entityTypes
-                .Select(type => CreateDefaultDescriptor(this.configuration, type))
-                .ToDictionary(info => info.ControllerName, info => info);
-        }
-
-        protected virtual HttpControllerDescriptor CreateDefaultDescriptor(
-            HttpConfiguration config,
-            Type entityType)
-        {
-            return new HttpControllerDescriptor(config, (entityType.Name + "Controller").ToLower(),
-                typeof (DefaultController<,>).MakeGenericType(entityType, entityType));
-        }
-
-        public HttpControllerDescriptor SelectController(HttpRequestMessage request)
-        {
-            var selectedController = request.GetRouteData().Values["controller"].ToString();
-
-            var controllerName = (selectedController + "Controller").ToLower();
-
-            HttpControllerDescriptor info;
-            if (this.controllerMappings.Value.TryGetValue(controllerName, out info))
+            try
             {
-                return CreateDefaultDescriptor(request.GetConfiguration(), info.ControllerType.GenericTypeArguments[0]);
+                var info = base.SelectController(request);
+                return info;
             }
+            catch (Exception)
+            {
+                var controllerName = GetControllerName(request).ToLower();
 
-            var message = $"Controller for '{selectedController}' not found!";
-            throw new HttpResponseException(request.CreateErrorResponse(HttpStatusCode.NotFound, message,
-                new Exception(message)));
-        }
+                var entity = this.entityTypes.FirstOrDefault(e => e.Name.ToLower() == controllerName);
+                if (entity == null)
+                    throw;
 
-        public IDictionary<string, HttpControllerDescriptor> GetControllerMapping()
-        {
-            return controllerMappings.Value;
+                return new HttpControllerDescriptor(request.GetConfiguration(), controllerName,
+                    typeof (DefaultController<>).MakeGenericType(entity));
+            }
         }
     }
 }

@@ -15,12 +15,12 @@ namespace Zoo.API.Configuration
 
             config.MapHttpAttributeRoutes();
 
-            ConfigureFormatters(config);
-
             config.Routes.MapHttpRoute(
                 name: "Default",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new {id = RouteParameter.Optional});
+
+            ConfigureFormatters(config);
 
             builder.RegisterModule(new ZooModule());
 
