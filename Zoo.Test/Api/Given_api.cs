@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Xunit;
+﻿using Xunit;
 
 namespace Zoo.Test.Api
 {
@@ -13,10 +12,15 @@ namespace Zoo.Test.Api
         }
 
         [Fact]
-        public void Zoo_works()
+        public void Creating_zoo_works()
         {
-            var json = this.server.Get("zoo?pageSize=10") as ICollection<dynamic>;
-            Assert.NotNull(json);
+            var result = this.server.Post("zoo",
+                new
+                {
+                    name = "Petting zoo"
+                });
+
+            Assert.Equal("Petting zoo", result["Name"]);
         }
 
         [Fact]

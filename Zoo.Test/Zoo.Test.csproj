@@ -133,7 +133,6 @@
     <Compile Include="Api\ServerFixture.cs" />
     <Compile Include="Given_database_context.cs" />
     <Compile Include="Given_entities_context.cs" />
-    <Compile Include="Given_generic_expression.cs" />
     <Compile Include="Infrastructure\Given_zoo_module.cs" />
     <Compile Include="Log\CountingDatabaseLogger.cs" />
     <Compile Include="Log\ILogger.cs" />

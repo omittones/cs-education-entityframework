@@ -12,13 +12,13 @@ namespace Zoo.Entity.Model.Maps
             {
                 m.ToTable("ZooKeepers");
                 m.Requires("Type").HasValue("admin");
-                m.PropertiesWithFixedNullMembers(t => new { });
+                m.PropertiesWithFixedNullMembers(t => new {});
             });
 
             Map(m =>
             {
                 m.ToTable("ZooAdmin");
-                m.Properties(t => t.Handlebars);
+                m.Properties(t => new {t.Handlebars});
                 m.Property(a => a.Handlebars);
             });
         }

@@ -10,11 +10,11 @@ namespace Zoo.Entity.Model.Maps
             {
                 m.ToTable("ZooKeepers");
                 m.Requires("Type").HasValue("keeper");
-                m.Properties(t => new { t.NoKeys, t.ZooId });
+                m.Properties(t => new {t.NoKeys, t.ZooId});
             });
 
             Property(t => t.NoKeys);
-            Property(t => t.ZooId);
+            Property(t => t.ZooId).IsOptional();
         }
     }
 }

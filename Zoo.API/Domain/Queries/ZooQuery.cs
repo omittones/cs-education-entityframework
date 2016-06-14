@@ -66,12 +66,14 @@ namespace Zoo.API.Domain.Queries
                         Name = m.Name + " " + m.Surrname,
                         NoKeys = m.NoKeys
                     }),
-                    Admin = new EmployeeView
-                    {
-                        Id = admin.Id,
-                        Name = admin.Name + " " + admin.Surrname,
-                        NoKeys = admin.NoKeys
-                    }
+                    Admin = admin == null
+                        ? null
+                        : new EmployeeView
+                        {
+                            Id = admin.Id,
+                            Name = admin.Name + " " + admin.Surrname,
+                            NoKeys = admin.NoKeys
+                        }
                 };
         }
     }

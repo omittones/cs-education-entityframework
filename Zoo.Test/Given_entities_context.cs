@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
+using Xunit.Abstractions;
+using Zoo.API.Domain.Queries;
+using Zoo.API.Domain.Queries.Requests;
+using Zoo.API.Domain.Services;
 using Zoo.Entity.Model;
 using Zoo.Test.Log;
 
@@ -9,7 +13,8 @@ namespace Zoo.Test
 {
     public class Given_entities_context : Given_database_context
     {
-        public Given_entities_context() : base(recreate: false)
+        public Given_entities_context(ITestOutputHelper output) :
+            base(output: output, recreate: false)
         {
         }
 
@@ -143,25 +148,21 @@ namespace Zoo.Test
             context.Set<HawkChickenHunter>().Add(hawk);
             context.SaveChanges();
         }
+        
+        [Fact]
+        public void Next_zoo_id_should_work()
+        {
+            var service = new ZooService(this.context);
 
-        //[Fact]
-        //public void Enums_should_convert_to_int_and_back()
-        //{
-        //    Creation_should_work();
+            Assert.True(service.GetNextId() > 0);
+        }
 
-        //    var employee = context.Set<Employee>().Create();
-        //    employee.Name = "Jon Stewart";
-        //    employee.OptionalDependentUser = context.Set<User>().First();
-        //    context.Set<Employee>().Add(employee);
-        //    context.SaveChanges();
-
-        //    //enums can be converted to int, and back
-        //    employee.OptionalDependentUser.Gender.ShouldEqual(UserGender.Male);
-
-        //    employee.Id.ShouldBeGreaterThan(0);
-        //    employee.OptionalDependentUser.ShouldNotBeNull();
-        //    employee.OptionalDependentUser.Id.ShouldBeGreaterThan(0);
-        //}
+        [Fact]
+        public void Zoo_query_should_work()
+        {
+            var query = new ZooQuery(this.context);
+            query.Resolve(new ZooRequest {isOpen = true});
+        }
 
         [Fact]
         public void All_animals_should_work()

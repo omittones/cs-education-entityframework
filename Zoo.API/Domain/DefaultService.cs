@@ -13,7 +13,7 @@ namespace Zoo.API.Domain
             this.context = context;
         }
 
-        public void Save(int id, TModel model)
+        public virtual void Save(int id, TModel model)
         {
             var entity = this.context.Set<TModel>().Find(id);
 
@@ -25,9 +25,12 @@ namespace Zoo.API.Domain
             this.context.SaveChanges();
         }
 
-        public int Create(TModel model)
+        public virtual int Create(TModel model)
         {
-            var entity = this.context.Set<TModel>().Add(model);
+            var entity = this.context.Set<TModel>().Create();
+            this.context.Set<TModel>().Add(entity);
+
+            AutoMapper.Mapper.Map<TModel, TModel>(model, entity);
 
             this.context.SaveChanges();
 

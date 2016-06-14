@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.Owin.Hosting;
-using Newtonsoft.Json.Linq;
 using RestSharp;
 using Zoo.API;
 
@@ -11,21 +10,27 @@ namespace Zoo.Test.Api
         private readonly Random random;
         private readonly int port;
         private readonly IDisposable server;
-        private RestClient client;
+        private readonly RestClient client;
 
         public ServerFixture()
         {
             this.random = new Random(DateTime.Now.Millisecond);
             this.port = random.Next(10000, 20000);
             this.server = WebApp.Start<Startup>($"http://localhost:{this.port}");
-            this.client = new RestSharp.RestClient($"http://localhost:{this.port}/api");
+            this.client = new RestClient($"http://localhost:{this.port}/api");
         }
 
         public dynamic Get(string url)
         {
-            return this.client.Get<dynamic>(new RestRequest(url, Method.GET)
-            {
-            }).Data;
+            var request = new RestRequest(url, Method.GET);
+            return this.client.Get<dynamic>(request).Data;
+        }
+
+        public dynamic Post(string url, object model)
+        {
+            var request = new RestRequest(url, Method.POST);
+            request.AddJsonBody(model);
+            return this.client.Post<dynamic>(request).Data;
         }
 
         public void Dispose()

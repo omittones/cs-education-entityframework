@@ -2,6 +2,7 @@
 using Zoo.API.Controllers;
 using Zoo.API.Domain;
 using Zoo.API.Domain.Queries;
+using Zoo.API.Domain.Services;
 using Zoo.Entity.Model;
 
 namespace Zoo.API.Configuration
@@ -34,6 +35,10 @@ namespace Zoo.API.Configuration
                 .AsImplementedInterfaces();
 
             builder.RegisterType<ZooQuery>()
+                .InstancePerLifetimeScope()
+                .AsImplementedInterfaces();
+
+            builder.RegisterType<ZooService>()
                 .InstancePerLifetimeScope()
                 .AsImplementedInterfaces();
 
