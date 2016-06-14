@@ -26,9 +26,16 @@ namespace Zoo.API.Controllers
 
         [HttpGet]
         [Route("")]
-        public IHttpActionResult GetAll()
+        public IHttpActionResult GetAll([FromUri] TReadRequest request)
         {
-            return Ok(query.Resolve());
+            if (request == null)
+            {
+                return Ok(query.Resolve());
+            }
+            else
+            {
+                return Ok(query.Resolve(request));
+            }
         }
 
         [HttpGet]
