@@ -42,6 +42,19 @@ namespace Zoo.API.Configuration
 
         private static void ConfigureRoutes(IContainer container, HttpConfiguration config)
         {
+            var types = container.Resolve<IList<Type>>();
+            foreach (var type in types)
+            {
+                var routeTemplate = $"api/{type.Name.ToLower()}/{{id}}";
+                if (config.Routes.All(r => r.RouteTemplate != routeTemplate))
+                {
+                    config.Routes.MapHttpRoute(
+                        name: $"{type.Name}Route",
+                        routeTemplate: routeTemplate,
+                        defaults: new {id = RouteParameter.Optional, controller = "Default"});
+                }
+            }
+
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(

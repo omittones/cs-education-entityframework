@@ -9,33 +9,27 @@ using Zoo.API.Controllers;
 
 namespace Zoo.API.Configuration
 {
+    // ReSharper disable once ClassNeverInstantiated.Global
     public class ControllerSelector : DefaultHttpControllerSelector
     {
         private readonly IList<Type> entityTypes;
 
-        public ControllerSelector(IList<Type> entityTypes, HttpConfiguration configuration) : base(configuration)
+        public ControllerSelector(
+            IList<Type> entityTypes,
+            HttpConfiguration configuration) : base(configuration)
         {
             this.entityTypes = entityTypes;
         }
 
         public override HttpControllerDescriptor SelectController(HttpRequestMessage request)
         {
-            try
+            var info = base.SelectController(request);
+            if (info.ControllerType == typeof (DefaultController))
             {
-                var info = base.SelectController(request);
-                return info;
-            }
-            catch (Exception)
-            {
-                var controllerName = GetControllerName(request).ToLower();
 
-                var entity = this.entityTypes.FirstOrDefault(e => e.Name.ToLower() == controllerName);
-                if (entity == null)
-                    throw;
-
-                return new HttpControllerDescriptor(request.GetConfiguration(), controllerName,
-                    typeof (DefaultController<>).MakeGenericType(entity));
             }
+
+            return info;
         }
     }
 }
