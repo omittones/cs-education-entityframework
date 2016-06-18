@@ -1,12 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.Text;
 using System.Web.Http;
-using System.Web.Http.Description;
 
 namespace Zoo.API.Controllers
 {
     [RoutePrefix("api")]
-    public class RootController : ApiController
+    public class ApiController : System.Web.Http.ApiController
     {
         [HttpGet]
         [Route("version")]

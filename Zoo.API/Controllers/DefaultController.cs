@@ -3,6 +3,10 @@ using Zoo.API.Domain;
 
 namespace Zoo.API.Controllers
 {
+    public class DefaultController : ApiController
+    {
+    }
+
     public class DefaultController<TModel> : DefaultController<TModel, GridRequest, TModel>
     {
         public DefaultController(IService<TModel> service, IQuery<GridRequest, TModel> query) :
@@ -11,7 +15,7 @@ namespace Zoo.API.Controllers
         }
     }
 
-    public class DefaultController<TWriteModel, TReadRequest, TReadModel> : ApiController
+    public class DefaultController<TWriteModel, TReadRequest, TReadModel> : DefaultController
     {
         private readonly IService<TWriteModel> service;
         private readonly IQuery<TReadRequest, TReadModel> query;

@@ -1,4 +1,7 @@
-﻿using System.Web.Http;
+﻿using System;
+using System.Linq;
+using System.Collections.Generic;
+using System.Web.Http;
 using Owin;
 using Autofac;
 using Autofac.Integration.WebApi;
@@ -13,26 +16,10 @@ namespace Zoo.API.Configuration
 
             var config = new HttpConfiguration();
 
-            config.MapHttpAttributeRoutes();
-
-            config.Routes.MapHttpRoute(
-                name: "Default",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new {id = RouteParameter.Optional});
-
-            ConfigureFormatters(config);
-
             builder.RegisterModule(new ZooModule());
 
-            builder.Register(c => new ControllerSelector(new[]
-            {
-                typeof (Entity.Model.Animal),
-                typeof (Entity.Model.Zoo),
-                typeof (Entity.Model.Employee),
-                typeof (Entity.Model.User),
-                typeof (Entity.Model.Bird),
-                typeof (Entity.Model.Cage)
-            }, config))
+            builder.RegisterType<ControllerSelector>()
+                .WithParameter("configuration", config)
                 .AsImplementedInterfaces()
                 .InstancePerLifetimeScope();
 
@@ -44,9 +31,23 @@ namespace Zoo.API.Configuration
 
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
 
+            ConfigureRoutes(container, config);
+
+            ConfigureFormatters(config);
+
             app.UseAutofacMiddleware(container);
             app.UseAutofacWebApi(config);
             app.UseWebApi(config);
+        }
+
+        private static void ConfigureRoutes(IContainer container, HttpConfiguration config)
+        {
+            config.MapHttpAttributeRoutes();
+
+            config.Routes.MapHttpRoute(
+                name: "Default",
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new {id = RouteParameter.Optional});
         }
 
         private static void ConfigureFormatters(HttpConfiguration config)

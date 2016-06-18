@@ -1,4 +1,6 @@
-﻿using Autofac;
+﻿using System;
+using System.Collections.Generic;
+using Autofac;
 using Zoo.API.Controllers;
 using Zoo.API.Domain;
 using Zoo.API.Domain.Queries;
@@ -17,6 +19,19 @@ namespace Zoo.API.Configuration
                 .AsSelf()
                 .AsImplementedInterfaces()
                 .InstancePerLifetimeScope();
+
+            builder.RegisterInstance(
+                new[]
+                {
+                    typeof (Animal),
+                    typeof (Entity.Model.Zoo),
+                    typeof (Employee),
+                    typeof (User),
+                    typeof (Bird),
+                    typeof (Cage)
+                }).As<IList<Type>>()
+                .SingleInstance();
+
 
             builder.RegisterGeneric(typeof (DefaultController<,,>))
                 .InstancePerLifetimeScope()

@@ -12,7 +12,9 @@ namespace Zoo.Test
     {
         public static void Main(string[] args)
         {
-            SelfHostedRunner.MaxThreadCount = 1;
+            if (Debugger.IsAttached)
+                SelfHostedRunner.MaxThreadCount = 1;
+
             SelfHostedRunner.RunAll(Assembly.GetExecutingAssembly());
 
             if (Debugger.IsAttached)
