@@ -1,11 +1,11 @@
 ﻿using System.Linq;
 using Zoo.Entity.Model;
 
-namespace Zoo.API.Domain
+namespace Zoo.API.Domain.Queries
 {
     public class DefaultQuery<TRequest, TView> : IQuery<TRequest, TView>
-        where TView : Root
         where TRequest : GridRequest
+        where TView : Root
     {
         private readonly Context context;
 
@@ -27,9 +27,15 @@ namespace Zoo.API.Domain
 
         public virtual TView[] Resolve(TRequest request)
         {
+            if (!request.page.HasValue)
+                request.page = 0;
+            if (!request.pageSize.HasValue)
+                request.pageSize = int.MaxValue;
+
             return this.context.Set<TView>()
-                .Skip(request.page*request.pageSize)
-                .Take(request.pageSize)
+                .OrderBy(e => e.Id)
+                .Skip(request.page.Value*request.pageSize.Value)
+                .Take(request.pageSize.Value)
                 .ToArray();
         }
     }

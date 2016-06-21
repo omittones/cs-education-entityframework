@@ -4,6 +4,8 @@ using Xunit;
 using Zoo.API.Configuration;
 using Zoo.API.Controllers;
 using Zoo.API.Domain;
+using Zoo.API.Domain.Queries.Requests;
+using Zoo.API.Domain.Queries.Views;
 using Zoo.Entity.Model;
 
 namespace Zoo.Test.Infrastructure
@@ -29,6 +31,20 @@ namespace Zoo.Test.Infrastructure
 
             var b = this.container.Resolve<IQuery<GridRequest, Animal>>();
             Assert.NotNull(b);
+        }
+
+        [Fact]
+        public void Animal_query_should_work()
+        {
+            var a = this.container.Resolve<IQuery<AnimalRequest, Animal>>();
+            Assert.NotNull(a);
+        }
+
+        [Fact]
+        public void Animal_controller_should_work()
+        {
+            var a = this.container.Resolve<AnimalController>();
+            Assert.NotNull(a);
         }
 
         [Fact]
