@@ -3,6 +3,7 @@
     //0.1.0 - add OWIN WebAPI implementation hosted via console
     //TODO - 0.2.0 - add automatic REST endpoints for all entities
     //TODO - 0.3.0 - separate reads and writes on REST endpoints
+    //TODO - 0.3.3 - add template model for each entity creation
     //TODO - 0.3.5 - add some test data
     //TODO - 0.4.0 - add ability to override default read endpoint, use custom input to the endpoint and resolve to custom output
     //TODO - 0.4.5 - explore ApiExplorer possibilities
