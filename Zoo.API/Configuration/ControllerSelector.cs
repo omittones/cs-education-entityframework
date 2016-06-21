@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Dispatcher;
@@ -13,23 +11,31 @@ namespace Zoo.API.Configuration
     public class ControllerSelector : DefaultHttpControllerSelector
     {
         private readonly IList<Type> entityTypes;
+        private readonly HttpConfiguration configuration;
 
         public ControllerSelector(
             IList<Type> entityTypes,
             HttpConfiguration configuration) : base(configuration)
         {
             this.entityTypes = entityTypes;
+            this.configuration = configuration;
         }
 
-        public override HttpControllerDescriptor SelectController(HttpRequestMessage request)
+        public override IDictionary<string, HttpControllerDescriptor> GetControllerMapping()
         {
-            var info = base.SelectController(request);
-            if (info.ControllerType == typeof (DefaultController))
+            var controllers = base.GetControllerMapping();
+            foreach (var entity in entityTypes)
             {
-
+                var name = entity.Name;
+                if (!controllers.ContainsKey(name))
+                {
+                    var info = new HttpControllerDescriptor(configuration, name,
+                        typeof (DefaultController<>).MakeGenericType(entity));
+                    controllers.Add(name, info);
+                }
             }
 
-            return info;
+            return controllers;
         }
     }
 }

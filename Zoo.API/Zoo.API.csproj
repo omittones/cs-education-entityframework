@@ -105,6 +105,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\ApiModule.cs" />
+    <Compile Include="Configuration\RouteProvider.cs" />
     <Compile Include="Configuration\ZooModule.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Configuration\ControllerSelector.cs" />
@@ -114,7 +115,7 @@
     <Compile Include="Domain\DefaultService.cs" />
     <Compile Include="Domain\IQuery.cs" />
     <Compile Include="Domain\IService.cs" />
-    <Compile Include="Controllers\ApiController.cs" />
+    <Compile Include="Controllers\RootController.cs" />
     <Compile Include="Domain\Queries\Views\EmployeeView.cs" />
     <Compile Include="Domain\Queries\ZooQuery.cs" />
     <Compile Include="Domain\Queries\Requests\ZooRequest.cs" />
