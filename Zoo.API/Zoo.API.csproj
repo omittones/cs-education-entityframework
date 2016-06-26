@@ -111,8 +111,12 @@
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Configuration\ControllerSelector.cs" />
     <Compile Include="Controllers\ZooController.cs" />
+    <Compile Include="Domain\Queries\AnimalQuery.cs" />
     <Compile Include="Domain\Queries\DefaultQuery.cs" />
     <Compile Include="Domain\GridRequest.cs" />
+    <Compile Include="Domain\Queries\GridRequestExtensions.cs" />
+    <Compile Include="Domain\Queries\Views\AnimalTypeView.cs" />
+    <Compile Include="Domain\Queries\Views\AnimalView.cs" />
     <Compile Include="Domain\Services\DefaultService.cs" />
     <Compile Include="Domain\IQuery.cs" />
     <Compile Include="Domain\IService.cs" />

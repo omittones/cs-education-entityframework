@@ -36,8 +36,11 @@ namespace Zoo.Test.Infrastructure
         [Fact]
         public void Animal_query_should_work()
         {
-            var a = this.container.Resolve<IQuery<AnimalRequest, Animal>>();
+            var a = this.container.Resolve<IQuery<AnimalRequest, AnimalView>>();
             Assert.NotNull(a);
+
+            var b = this.container.Resolve<IQuery<AnimalRequest, AnimalTypeView>>();
+            Assert.NotNull(b);
         }
 
         [Fact]

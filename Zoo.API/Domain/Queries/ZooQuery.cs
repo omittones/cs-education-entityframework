@@ -36,7 +36,9 @@ namespace Zoo.API.Domain.Queries
                         select i);
             }
 
-            return Project(inner).ToArray();
+            var ordered = Project(inner).OrderBy(e => e.Id);
+
+            return request.ApplyTo(ordered).ToArray();
         }
 
         public ZooView ResolveOne(int id)
