@@ -1,9 +1,11 @@
 ﻿using System.Web.Http;
 using Zoo.API.Domain;
+using Zoo.Entity.Model;
 
 namespace Zoo.API.Controllers
 {
     public class DefaultController<TModel> : DefaultController<TModel, GridRequest, TModel>
+        where TModel : IWithId
     {
         public DefaultController(IService<TModel> service, IQuery<GridRequest, TModel> animalQuery) :
             base(service, animalQuery)
@@ -12,16 +14,17 @@ namespace Zoo.API.Controllers
     }
 
     public class DefaultController<TWriteModel, TReadRequest, TReadModel> : ApiController
+        where TReadModel : IWithId
     {
         private readonly IService<TWriteModel> service;
-        private readonly IQuery<TReadRequest, TReadModel> animalQuery;
+        private readonly IQuery<TReadRequest, TReadModel> query;
 
         public DefaultController(
             IService<TWriteModel> service,
-            IQuery<TReadRequest, TReadModel> animalQuery)
+            IQuery<TReadRequest, TReadModel> query)
         {
             this.service = service;
-            this.animalQuery = animalQuery;
+            this.query = query;
         }
 
         [HttpGet]
@@ -30,11 +33,11 @@ namespace Zoo.API.Controllers
         {
             if (request == null)
             {
-                return Ok(animalQuery.Resolve());
+                return Ok(query.Resolve());
             }
             else
             {
-                return Ok(animalQuery.Resolve(request));
+                return Ok(query.Resolve(request));
             }
         }
 
@@ -42,7 +45,7 @@ namespace Zoo.API.Controllers
         [Route("{id:int}")]
         public IHttpActionResult GetOne(int id)
         {
-            var read = animalQuery.ResolveOne(id);
+            var read = query.ResolveOne(id);
             if (read == null)
                 return NotFound();
 
@@ -55,7 +58,7 @@ namespace Zoo.API.Controllers
         {
             var id = this.service.Create(model);
 
-            var read = this.animalQuery.ResolveOne(id);
+            var read = this.query.ResolveOne(id);
 
             return Ok(read);
         }
@@ -66,9 +69,19 @@ namespace Zoo.API.Controllers
         {
             this.service.Save(id, model);
 
-            var read = this.animalQuery.ResolveOne(id);
+            var read = this.query.ResolveOne(id);
 
             return Ok(read);
+        }
+
+        [HttpPut]
+        [Route("")]
+        public IHttpActionResult UpdateBulk([FromUri] TReadRequest request, [FromBody] TWriteModel model)
+        {
+            var items = this.query.Resolve(request);
+            foreach (var item in items)
+                this.service.Save(item.Id, model);
+            return Ok();
         }
     }
 }

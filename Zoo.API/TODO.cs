@@ -1,7 +1,7 @@
 ﻿namespace Zoo.API
 {
     //0.1.0 - add OWIN WebAPI implementation hosted via console
-    //TODO - 0.2.0 - add automatic REST endpoints for all entities
+    //0.2.0 - add automatic REST endpoints for all entities
     //TODO - 0.3.0 - separate reads and writes on REST endpoints
     //TODO - 0.3.3 - add template model for each entity creation
     //TODO - 0.3.5 - add some test data

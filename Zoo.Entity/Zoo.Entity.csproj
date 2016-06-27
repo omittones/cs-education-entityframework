@@ -80,7 +80,7 @@
     <Compile Include="Model\Maps\BirdHierarchy\HawkDetailsMap.cs" />
     <Compile Include="Model\HawkMouseHunter.cs" />
     <Compile Include="Model\Maps\BirdHierarchy\HawkMouseHunterMap.cs" />
-    <Compile Include="Model\IRoot.cs" />
+    <Compile Include="Model\IWithId.cs" />
     <Compile Include="Model\Maps\AnimalHierarchy\AnimalMap.cs" />
     <Compile Include="Model\AnimalType.cs" />
     <Compile Include="Model\Ape.cs" />

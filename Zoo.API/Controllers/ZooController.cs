@@ -21,16 +21,18 @@ namespace Zoo.API.Controllers
         }
 
         [HttpGet]
-        [Route("{id:int}/animals")]
-        public virtual IHttpActionResult AllAnimals(int id, [FromUri] AnimalRequest request)
+        [Route("{zooId:int}/animals")]
+        public virtual IHttpActionResult AllAnimals(int zooId, [FromUri] GridRequest request)
         {
-            request.belongsToZooId = id;
-            var animals = animalQuery.Resolve(request);
+            var proper = new AnimalRequest(request);
+            proper.belongsToZooId = zooId;
+
+            var animals = animalQuery.Resolve(proper);
             return Ok(animals);
         }
 
         [HttpGet]
-        [Route("{id:int}/animals/{animalId:int}")]
+        [Route("{zooId:int}/animals/{animalId:int}")]
         public virtual IHttpActionResult OneAnimals(int zooId, int animalId)
         {
             //TODO - make sure animalId belongs to zooId

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Zoo.API.Domain.Queries.Views
 {
-    public class ZooView
+    public class ZooView : IView
     {
         public int Id { get; set; }
         public int NoAnimals { get; set; }

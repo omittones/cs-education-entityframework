@@ -117,6 +117,7 @@
     <Compile Include="Domain\Queries\GridRequestExtensions.cs" />
     <Compile Include="Domain\Queries\Views\AnimalTypeView.cs" />
     <Compile Include="Domain\Queries\Views\AnimalView.cs" />
+    <Compile Include="Domain\Queries\Views\IView.cs" />
     <Compile Include="Domain\Services\DefaultService.cs" />
     <Compile Include="Domain\IQuery.cs" />
     <Compile Include="Domain\IService.cs" />
