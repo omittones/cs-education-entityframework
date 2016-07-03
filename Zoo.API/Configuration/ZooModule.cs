@@ -57,6 +57,10 @@ namespace Zoo.API.Configuration
                 .InstancePerLifetimeScope()
                 .AsImplementedInterfaces();
 
+            builder.RegisterType<AnimalTypeQuery>()
+                .InstancePerLifetimeScope()
+                .AsImplementedInterfaces();
+
             builder.RegisterType<ZooService>()
                 .InstancePerLifetimeScope()
                 .AsImplementedInterfaces();
