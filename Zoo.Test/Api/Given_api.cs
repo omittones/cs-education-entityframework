@@ -12,6 +12,24 @@ namespace Zoo.Test.Api
         }
 
         [Fact]
+        public void Getting_zoos_work()
+        {
+            var result = this.server.Get("zoo");
+            Assert.True(result.Count > 0);
+
+            dynamic zoo = result[0];
+            var id = (int) zoo["Id"];
+            Assert.True(id > 0);
+
+            zoo = this.server.Get($"zoo/{id}");
+            Assert.NotNull(zoo);
+            Assert.Equal(id, zoo["Id"]);
+
+            var animals = this.server.Get($"zoo/{id}/animals");
+            Assert.NotNull(animals);
+        }
+
+        [Fact]
         public void Creating_zoo_works()
         {
             var result = this.server.Post("zoo",

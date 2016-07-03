@@ -43,13 +43,21 @@ namespace Zoo.API.Configuration
 
             builder.RegisterGeneric(typeof (DefaultService<>))
                 .InstancePerLifetimeScope()
-                .AsImplementedInterfaces();
+                .As(typeof (IService<>));
 
             builder.RegisterGeneric(typeof (DefaultQuery<,>))
                 .InstancePerLifetimeScope()
-                .AsImplementedInterfaces();
+                .As(typeof (IQuery<,>));
 
             builder.RegisterType<ZooQuery>()
+                .InstancePerLifetimeScope()
+                .AsImplementedInterfaces();
+
+            builder.RegisterType<AnimalQuery>()
+                .InstancePerLifetimeScope()
+                .AsImplementedInterfaces();
+
+            builder.RegisterType<AnimalTypeQuery>()
                 .InstancePerLifetimeScope()
                 .AsImplementedInterfaces();
 
@@ -58,6 +66,10 @@ namespace Zoo.API.Configuration
                 .AsImplementedInterfaces();
 
             builder.RegisterType<ZooController>()
+                .InstancePerLifetimeScope()
+                .AsSelf();
+
+            builder.RegisterType<AnimalController>()
                 .InstancePerLifetimeScope()
                 .AsSelf();
         }

@@ -4,7 +4,7 @@ using System.Web.Http;
 namespace Zoo.API.Controllers
 {
     [RoutePrefix("api")]
-    public class ApiController : System.Web.Http.ApiController
+    public class RootController : System.Web.Http.ApiController
     {
         [HttpGet]
         [Route("version")]

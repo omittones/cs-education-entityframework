@@ -9,9 +9,36 @@ namespace Zoo.API.Controllers
     [RoutePrefix("api/zoo")]
     public class ZooController : DefaultController<EditZooCommand, ZooRequest, ZooView>
     {
-        public ZooController(IService<EditZooCommand> service, IQuery<ZooRequest, ZooView> query)
-            : base(service, query)
+        private readonly IQuery<AnimalRequest, AnimalTypeView> animalQuery;
+
+        public ZooController(
+            IService<EditZooCommand> service,
+            IQuery<ZooRequest, ZooView> zooQuery,
+            IQuery<AnimalRequest, AnimalTypeView> animalQuery)
+            : base(service, zooQuery)
         {
+            this.animalQuery = animalQuery;
+        }
+
+        [HttpGet]
+        [Route("{zooId:int}/animals")]
+        public virtual IHttpActionResult AllAnimals(int zooId, [FromUri] GridRequest request)
+        {
+            var proper = new AnimalRequest(request);
+            proper.belongsToZooId = zooId;
+
+            var animals = animalQuery.Resolve(proper);
+            return Ok(animals);
+        }
+
+        [HttpGet]
+        [Route("{zooId:int}/animals/{animalId:int}")]
+        public virtual IHttpActionResult OneAnimal(int zooId, int animalId)
+        {
+            var request = new AnimalRequest();
+            request.belongsToZooId = zooId;
+            var animal = animalQuery.ResolveOne(request, animalId);
+            return Ok(animal);
         }
     }
 }

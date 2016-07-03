@@ -1,7 +1,7 @@
 ﻿using System;
 using Zoo.Entity.Model;
 
-namespace Zoo.API.Domain
+namespace Zoo.API.Domain.Services
 {
     public class DefaultService<TModel> : IService<TModel>
         where TModel : Root

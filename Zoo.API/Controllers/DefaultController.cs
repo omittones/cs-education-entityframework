@@ -1,21 +1,20 @@
 ﻿using System.Web.Http;
 using Zoo.API.Domain;
+using Zoo.Entity.Model;
 
 namespace Zoo.API.Controllers
 {
-    public class DefaultController : ApiController
-    {
-    }
-
     public class DefaultController<TModel> : DefaultController<TModel, GridRequest, TModel>
+        where TModel : IWithId
     {
-        public DefaultController(IService<TModel> service, IQuery<GridRequest, TModel> query) :
-            base(service, query)
+        public DefaultController(IService<TModel> service, IQuery<GridRequest, TModel> animalQuery) :
+            base(service, animalQuery)
         {
         }
     }
 
-    public class DefaultController<TWriteModel, TReadRequest, TReadModel> : DefaultController
+    public class DefaultController<TWriteModel, TReadRequest, TReadModel> : ApiController
+        where TReadModel : IWithId
     {
         private readonly IService<TWriteModel> service;
         private readonly IQuery<TReadRequest, TReadModel> query;
@@ -73,6 +72,16 @@ namespace Zoo.API.Controllers
             var read = this.query.ResolveOne(id);
 
             return Ok(read);
+        }
+
+        [HttpPut]
+        [Route("")]
+        public IHttpActionResult UpdateBulk([FromUri] TReadRequest request, [FromBody] TWriteModel model)
+        {
+            var items = this.query.Resolve(request);
+            foreach (var item in items)
+                this.service.Save(item.Id, model);
+            return Ok();
         }
     }
 }
