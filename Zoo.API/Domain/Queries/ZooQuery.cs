@@ -16,7 +16,7 @@ namespace Zoo.API.Domain.Queries
 
         private IOrderedQueryable<Entity.Model.Zoo> ProcessRequest(ZooRequest request)
         {
-            var inner = this.context.Set<Entity.Model.Zoo>().AsQueryable();
+            var inner = (IQueryable<Entity.Model.Zoo>) this.context.Set<Entity.Model.Zoo>();
 
             if (request.isOpen.HasValue && request.isOpen.Value)
             {
@@ -65,16 +65,17 @@ namespace Zoo.API.Domain.Queries
 
         private IQueryable<ZooView> Project(IQueryable<Entity.Model.Zoo> query)
         {
-            return from z in query
-                let admin = z.Keepers.OfType<ZooAdmin>().FirstOrDefault()
-                let managers = z.Keepers.OfType<ZooKeeper>()
+            return from zoo in query
+                join admin in this.context.Set<ZooAdmin>() on zoo.Id equals admin.ZooId into admins
+                join keeper in this.context.Set<ZooKeeper>() on zoo.Id equals keeper.ZooId into keepers
+                let admin = admins.FirstOrDefault()
                 select new ZooView
                 {
-                    Id = z.Id,
-                    Name = z.Name,
-                    NoAnimals = z.Animals.Count(),
-                    NoKeepers = z.Keepers.Count(),
-                    Managers = managers.Select(m => new EmployeeView
+                    Id = zoo.Id,
+                    Name = zoo.Name,
+                    NoAnimals = zoo.Animals.Count(),
+                    NoKeepers = zoo.Keepers.Count(),
+                    Managers = keepers.Select(m => new EmployeeView
                     {
                         Id = m.Id,
                         Name = m.Name + " " + m.Surrname,
