@@ -1,0 +1,12 @@
+{
+    "compileOnSave": true,
+    "compilerOptions": {
+    	"module": "amd",
+    	"inlineSourceMap": true,
+    	"inlineSources": true,
+        "outFile": "compiled.js"
+    },
+    "exclude": [
+        "node_modules"
+    ]
+}
