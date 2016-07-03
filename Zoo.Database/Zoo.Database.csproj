@@ -55,10 +55,6 @@
     <Content Include="01_scripts\00008-add-tph-with-entity-split.sql" />
     <Content Include="01_scripts\00009-reqs.sql" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="mig.config" />
-    <None Include="reload.bat" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

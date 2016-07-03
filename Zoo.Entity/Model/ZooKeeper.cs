@@ -4,6 +4,6 @@ namespace Zoo.Entity.Model
     {
         public int NoKeys { get; set; }
 
-        public int ZooId { get; set; }
+        public int? ZooId { get; set; }
     }
 }

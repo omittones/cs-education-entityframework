@@ -1,35 +1,62 @@
 ﻿using System;
+using System.Linq;
+using System.Collections.Generic;
 using System.Web.Http;
-using System.Web.Http.Dispatcher;
 using Owin;
+using Autofac;
+using Autofac.Integration.WebApi;
 
 namespace Zoo.API.Configuration
 {
-    public class ApiModule
+    public static class ApiModule
     {
-        public static IDisposable Configure(IAppBuilder app)
+        public static void Configure(IAppBuilder app)
         {
+            var builder = new ContainerBuilder();
+
             var config = new HttpConfiguration();
 
+            builder.RegisterModule(new ZooModule());
+
+            builder.RegisterType<ControllerSelector>()
+                .WithParameter("configuration", config)
+                .AsImplementedInterfaces()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterApiControllers();
+            builder.RegisterWebApiFilterProvider(config);
+            builder.RegisterWebApiModelBinderProvider();
+
+            var container = builder.Build();
+
+            config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+
+            ConfigureRoutes(container, config);
+
+            ConfigureFormatters(config);
+
+            app.UseAutofacMiddleware(container);
+            app.UseAutofacWebApi(config);
+            app.UseWebApi(config);
+        }
+
+        private static void ConfigureRoutes(IContainer container, HttpConfiguration config)
+        {
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
                 name: "Default",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new {id = RouteParameter.Optional});
+        }
 
-            config.Services.Replace(typeof (IHttpControllerSelector), new ControllerSelector(
-                new[]
-                {
-                    typeof (Entity.Model.Zoo),
-                    typeof (Entity.Model.Employee),
-                    typeof (Entity.Model.User),
-                    typeof (Entity.Model.Animal)
-                }));
+        private static void ConfigureFormatters(HttpConfiguration config)
+        {
+            var json = config.Formatters.JsonFormatter;
+            var xml = config.Formatters.XmlFormatter;
+            config.Formatters.Remove(xml);
 
-            app.UseWebApi(config);
-
-            return config;
+            json.UseDataContractJsonSerializer = false;
         }
     }
 }

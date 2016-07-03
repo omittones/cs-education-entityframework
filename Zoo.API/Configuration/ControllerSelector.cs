@@ -2,39 +2,40 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Dispatcher;
 using Zoo.API.Controllers;
 
 namespace Zoo.API.Configuration
 {
-    public class ControllerSelector : IHttpControllerSelector
+    public class ControllerSelector : DefaultHttpControllerSelector
     {
         private readonly IList<Type> entityTypes;
 
-        public ControllerSelector(IList<Type> entityTypes)
+        public ControllerSelector(IList<Type> entityTypes, HttpConfiguration configuration) : base(configuration)
         {
             this.entityTypes = entityTypes;
         }
 
-        public HttpControllerDescriptor SelectController(HttpRequestMessage request)
+        public override HttpControllerDescriptor SelectController(HttpRequestMessage request)
         {
-            var selectedController = request.GetRouteData().Values["controller"].ToString();
-
-            var entityType = entityTypes.FirstOrDefault(t => t.Name.ToLower() == selectedController.ToLower());
-            if (entityType != null)
+            try
             {
-                return new HttpControllerDescriptor(request.GetConfiguration(),
-                    selectedController + "Controller",
-                    typeof (DefaultController<>).MakeGenericType(entityType));
+                var info = base.SelectController(request);
+                return info;
             }
+            catch (Exception)
+            {
+                var controllerName = GetControllerName(request).ToLower();
 
-            return null;
-        }
+                var entity = this.entityTypes.FirstOrDefault(e => e.Name.ToLower() == controllerName);
+                if (entity == null)
+                    throw;
 
-        public IDictionary<string, HttpControllerDescriptor> GetControllerMapping()
-        {
-            return null;
+                return new HttpControllerDescriptor(request.GetConfiguration(), controllerName,
+                    typeof (DefaultController<>).MakeGenericType(entity));
+            }
         }
     }
 }

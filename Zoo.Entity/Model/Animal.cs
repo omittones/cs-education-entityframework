@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity.ModelConfiguration;
 
 namespace Zoo.Entity.Model
 {
-    public class Animal
+    public class Animal : Root
     {
-        public int Id { get; set; }
-
         public DateTime DateOfBirth { get; set; }
 
         public virtual User Owner { get; set; }

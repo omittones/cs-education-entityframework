@@ -10,7 +10,7 @@ namespace Zoo.Entity.Model.Maps.ZooHierarchy
             {
                 m.ToTable("ClosedZoos");
                 m.MapInheritedProperties();
-                m.Properties(t => new { t.ClosingDate });
+                m.Properties(t => new {t.ClosingDate});
             });
 
             Property(e => e.ClosingDate);
