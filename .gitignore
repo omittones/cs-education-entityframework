@@ -4,4 +4,6 @@ bin
 obj
 packages
 /Zoo.Database/00_backups/mig.*
+/Web/node_modules
+/Web/*.js
 *.sublime-workspace
