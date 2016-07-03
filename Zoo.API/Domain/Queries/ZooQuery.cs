@@ -16,7 +16,14 @@ namespace Zoo.API.Domain.Queries
 
         public ZooView[] Resolve(ZooRequest request)
         {
-            IQueryable<Entity.Model.Zoo> inner = this.context.Set<Entity.Model.Zoo>();
+            var filtered = ProcessRequest(request);
+
+            return Project(filtered).ToArray();
+        }
+
+        private IOrderedQueryable<Entity.Model.Zoo> ProcessRequest(ZooRequest request)
+        {
+            var inner = this.context.Set<Entity.Model.Zoo>().AsQueryable();
 
             if (request.isOpen.HasValue && request.isOpen.Value)
             {
@@ -36,9 +43,14 @@ namespace Zoo.API.Domain.Queries
                         select i);
             }
 
-            var ordered = Project(inner).OrderBy(e => e.Id);
+            return inner.OrderBy(e => e.Id);
+        }
 
-            return request.ApplyTo(ordered).ToArray();
+        public ZooView ResolveOne(ZooRequest request, int id)
+        {
+            var filtered = ProcessRequest(request);
+
+            return Project(filtered).FirstOrDefault(e => e.Id == id);
         }
 
         public ZooView ResolveOne(int id)

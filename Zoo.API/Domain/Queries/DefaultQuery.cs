@@ -14,23 +14,41 @@ namespace Zoo.API.Domain.Queries
             this.context = context;
         }
 
+        protected virtual IQueryable<TView> ProcessRequest(TRequest request)
+        {
+            var inner = this.context
+                .Set<TView>()
+                .OrderBy(e => e.Id);
+            if (request == null)
+                return inner;
+            else
+                return request.ApplyTo(inner);
+        }
+
+        public virtual TView ResolveOne(TRequest request, int id)
+        {
+            var filtered = ProcessRequest(request);
+
+            return filtered.FirstOrDefault(e => e.Id == id);
+        }
+
         public virtual TView ResolveOne(int id)
         {
-            return this.context.Set<TView>()
-                .FirstOrDefault(e => e.Id == id);
+            var filtered = ProcessRequest(null);
+
+            return filtered.FirstOrDefault(e => e.Id == id);
         }
 
         public virtual TView[] Resolve()
         {
-            return this.context.Set<TView>().ToArray();
+            return ProcessRequest(null).ToArray();
         }
 
         public virtual TView[] Resolve(TRequest request)
         {
-            var inner = this.context.Set<TView>().OrderBy(e => e.Id);
-            return request
-                .ApplyTo(inner)
-                .ToArray();
+            var inner = ProcessRequest(request);
+
+            return inner.ToArray();
         }
     }
 }

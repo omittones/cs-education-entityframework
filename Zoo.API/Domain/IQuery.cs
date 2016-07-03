@@ -4,6 +4,8 @@
     {
         TOutput[] Resolve(TInput request);
 
+        TOutput ResolveOne(TInput request, int id);
+
         TOutput ResolveOne(int id);
 
         TOutput[] Resolve();

@@ -10,6 +10,6 @@
     //TODO - 0.4.6 - add a script for renaming the projects
     //TODO - 0.5.0 - move to dotnet core
     //TODO - 0.5.5 - setup live server
-
+    //TODO - 0.6.0 - implement support for OData 
     //TODO - 1.5.0 - setup simple logging
 }

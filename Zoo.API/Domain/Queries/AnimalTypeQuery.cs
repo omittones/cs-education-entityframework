@@ -5,26 +5,34 @@ using Zoo.Entity.Model;
 
 namespace Zoo.API.Domain.Queries
 {
-    public class AnimalQuery : BaseAnimalQuery,
-        IQuery<AnimalRequest, AnimalView>
+    public class AnimalTypeQuery : BaseAnimalQuery,
+        IQuery<AnimalRequest, AnimalTypeView>
     {
         private readonly Context context;
 
-        public AnimalQuery(Context context) : base(context)
+        public AnimalTypeQuery(Context context) : base(context)
         {
             this.context = context;
         }
 
-        protected virtual IQueryable<AnimalView> Project(IQueryable<Animal> query)
+        protected virtual IQueryable<AnimalTypeView> Project(IQueryable<Animal> query)
         {
             return from a in query
-                select new AnimalView
+                select new AnimalTypeView
                 {
-                    Id = a.Id
+                    Id = a.Id,
+                    Name = "N/A",
+                    Type = ""
                 };
         }
 
-        public AnimalView ResolveOne(AnimalRequest request, int id)
+        public AnimalTypeView[] Resolve(AnimalRequest request)
+        {
+            var inner = ProcessRequest(request);
+            return Project(inner).ToArray();
+        }
+
+        public AnimalTypeView ResolveOne(AnimalRequest request, int id)
         {
             var inner = ProcessRequest(request)
                 .Where(e => e.Id == id);
@@ -32,7 +40,7 @@ namespace Zoo.API.Domain.Queries
             return views.FirstOrDefault();
         }
 
-        public AnimalView ResolveOne(int id)
+        public AnimalTypeView ResolveOne(int id)
         {
             var inner = from a in this.context.Set<Animal>()
                 where a.Id == id
@@ -40,19 +48,11 @@ namespace Zoo.API.Domain.Queries
             return Project(inner).FirstOrDefault();
         }
 
-        public AnimalView[] Resolve()
+        public AnimalTypeView[] Resolve()
         {
             var inner = from a in this.context.Set<Animal>()
                 select a;
             return Project(inner).ToArray();
-        }
-
-        public AnimalView[] Resolve(AnimalRequest request)
-        {
-            var inner = ProcessRequest(request);
-            var views = Project(inner)
-                .OrderBy(e => e.Id);
-            return request.ApplyTo(views).ToArray();
         }
     }
 }

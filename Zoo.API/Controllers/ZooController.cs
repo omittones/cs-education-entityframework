@@ -33,11 +33,12 @@ namespace Zoo.API.Controllers
 
         [HttpGet]
         [Route("{zooId:int}/animals/{animalId:int}")]
-        public virtual IHttpActionResult OneAnimals(int zooId, int animalId)
+        public virtual IHttpActionResult OneAnimal(int zooId, int animalId)
         {
-            //TODO - make sure animalId belongs to zooId
-            var animals = animalQuery.ResolveOne(animalId);
-            return Ok(animals);
+            var request = new AnimalRequest();
+            request.belongsToZooId = zooId;
+            var animal = animalQuery.ResolveOne(request, animalId);
+            return Ok(animal);
         }
     }
 }
