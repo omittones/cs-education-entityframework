@@ -1,10 +1,11 @@
 {
     "compileOnSave": true,
     "compilerOptions": {
-    	"module": "amd",
+    	"module": "CommonJS",
+        "moduleResolution" : "node",
     	"inlineSourceMap": true,
     	"inlineSources": true,
-        "outFile": "compiled.js"
+        "outDir" : "./compiled"
     },
     "exclude": [
         "node_modules"
