@@ -1,10 +1,14 @@
-///<reference path="utils.ts" />
+import * as utils from './Utils';
 
-var logger : ILogger = console;
-logger.log('Test method!');
+export function main():void {
 
-logger = new EnableDecorator(console, true);
-logger.log('Test method!');
+    var logger : utils.ILogger = console;
+    logger.log('Test method!');
 
-logger = new EnableDecorator(console, false);
-logger.log('Test method!');
+    logger = new utils.EnableDecorator(console, true);
+    logger.log('Test method!');
+
+    logger = new utils.EnableDecorator(console, false);
+    logger.log('Test method!');
+
+}

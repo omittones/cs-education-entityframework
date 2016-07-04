@@ -1,8 +1,8 @@
-interface ILogger {
+export interface ILogger {
 	log (message:string):void;
 }
 
-class EnableDecorator implements ILogger {
+export class EnableDecorator implements ILogger {
 	constructor(private inner:ILogger, enabled:boolean) {
 		//very nice
 		if (enabled) {
