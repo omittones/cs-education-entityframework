@@ -1,11 +1,16 @@
 <html>
 <head>
-    <script src="node_modules/systemjs/dist/system.js"></script>
+    <script src="./node_modules/systemjs/dist/system.js"></script>
+    <script src="./compiled.js"></script>
     <script>
       System.config({
-        defaultJSExtensions: true
+        defaultJSExtensions: false,
+        map: {
+          'react': './node_modules/react/dist/react.js',
+          'react-dom': './node_modules/react-dom/dist/react-dom.js'
+        }
       });
-      System.import('compiled/index.js').then(
+      System.import('index').then(
         function(index) {
           index.main();
         }
@@ -13,7 +18,7 @@
     </script>
 </head>
 <body>
-    <div>
+    <div class="app-container">
         <ul>
             <li>This</li>
             <li>is</li>

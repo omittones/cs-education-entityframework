@@ -2,10 +2,11 @@
     "compileOnSave": true,
     "compilerOptions": {
         "module": "system",
+        "target": "es5",
         "moduleResolution" : "node",
         "inlineSourceMap": true,
         "inlineSources": true,
-        "outDir" : "./compiled",
+        "outFile" : "./compiled.js",
         "jsx" : "React"
     },
     "exclude": [

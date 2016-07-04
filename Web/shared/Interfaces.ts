@@ -25,7 +25,7 @@ namespace Interfaces {
     }
 
     // Defines the interface of the properties of the Footer component
-    export interface ITodoFooterProps {
+    export interface IFooterProps {
         completedCount: number;
         onClearCompleted: any;
         nowShowing: string;

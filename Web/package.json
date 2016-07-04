@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "react": "^15.2.0",
+    "react-dom": "^15.2.0",
     "systemjs": "^0.19.31",
     "typescript": "^1.8.10"
   },
