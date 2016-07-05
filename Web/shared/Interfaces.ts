@@ -3,6 +3,7 @@ namespace Interfaces {
     export interface IEditorProps {
         lines:Array<string>;
         lineAdded?: (line: string)=>void;
+        hideList?: boolean
     }
 
     export interface IAppProps {

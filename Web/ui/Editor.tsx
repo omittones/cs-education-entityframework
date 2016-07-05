@@ -8,6 +8,10 @@ export class Editor extends React.Component<Interfaces.IEditorProps, {}> {
         super(props, context);
     }
 
+    public static propTypes:any = {
+        hideList: React.PropTypes.bool.isRequired
+    };
+
     private handleKeydown(event: React.KeyboardEvent) {
         if (event.keyCode === 13) {
             let el = this.refs['newLineText'] as HTMLInputElement;
@@ -20,13 +24,16 @@ export class Editor extends React.Component<Interfaces.IEditorProps, {}> {
     public render() {
         return (
             <div>
+                {
+                    this.props.hideList ? (<div/>) : (
                 <ul>
                     {
-                        this.props.lines.map((line: string, index:number) => {
+                        this.props.lines.map((line: string, index: number) => {
                             return <li key={index}>{line}</li>
                         })
                     }
-                </ul>
+                </ul>)
+                }
                 <input ref="newLineText" type="text" defaultValue="Add new line..." onKeyDown={e => this.handleKeydown(e) }>
                 </input>
             </div>);

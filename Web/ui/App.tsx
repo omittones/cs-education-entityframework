@@ -86,7 +86,7 @@ export class App extends React.Component<Interfaces.IAppProps, { nowShowing: str
                     </div>
                 </nav>
                 <div>
-                    <Editor lineAdded={line => this.addLine(line) } lines={this.state.lines}>
+                    <Editor hideList={false} lineAdded={line => this.addLine(line)} lines={this.state.lines}>
                     </Editor>
                 </div>
                 {clearButton}
