@@ -27,7 +27,7 @@ export class Editor extends React.Component<Interfaces.IEditorProps, {}> {
                         })
                     }
                 </ul>
-                <input ref="newLineText" type="text" onKeyDown={e => this.handleKeydown(e) }>
+                <input ref="newLineText" type="text" defaultValue="Add new line..." onKeyDown={e => this.handleKeydown(e) }>
                 </input>
             </div>);
     }
