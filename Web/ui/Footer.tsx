@@ -4,7 +4,7 @@ import * as React from 'react'
 
 import { Utils } from '../shared/Utils'
 
-export class Footer extends React.Component<Interfaces.IFooterProps, {}> {
+export class Footer extends React.Component<Interfaces.IFooterProps, any> {
 
     public render() {
 

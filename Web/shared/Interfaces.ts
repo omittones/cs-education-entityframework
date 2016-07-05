@@ -27,7 +27,7 @@ namespace Interfaces {
     // Defines the interface of the properties of the Footer component
     export interface IFooterProps {
         completedCount: number;
-        onClearCompleted: any;
+        onClearCompleted?: any;
         nowShowing: string;
         count: number;
     }

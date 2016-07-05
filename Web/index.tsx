@@ -18,7 +18,9 @@ export function main(): void {
     let model: Interfaces.IFooterProps = { nowShowing: '1', completedCount: 0, count: 0, onClearCompleted: null };
 
     ReactDOM.render(
-        <Footer model={model}/>,
+        <Footer completedCount={1}
+                nowShowing="2"
+                count={1} />,
         document.getElementsByClassName('app-container')[0]
     );
 }
