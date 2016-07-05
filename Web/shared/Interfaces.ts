@@ -1,5 +1,10 @@
 namespace Interfaces {
 
+    export interface IEditorProps {
+        lines:Array<string>;
+        lineAdded?: (line: string)=>void;
+    }
+
     export interface IAppProps {
         completedCount: number;
         onClearCompleted?: any;

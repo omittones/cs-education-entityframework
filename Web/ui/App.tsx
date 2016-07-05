@@ -1,15 +1,15 @@
 //<reference path="../shared/Interfaces.ts" />
-
 import * as React from 'react'
-
 import { Utils } from '../shared/Utils'
+import { Editor } from './Editor'
 
-export class App extends React.Component<Interfaces.IAppProps, { nowShowing: string }> {
+export class App extends React.Component<Interfaces.IAppProps, { nowShowing: string, lines: Array<string> }> {
 
     constructor(props: Interfaces.IAppProps, context: any) {
         super(props, context);
         this.state = {
-            nowShowing: this.props.firstShowing
+            nowShowing: this.props.firstShowing,
+            lines: ['1', '2', '3', '4']
         };
     }
 
@@ -19,8 +19,20 @@ export class App extends React.Component<Interfaces.IAppProps, { nowShowing: str
                 return prev;
             else
                 return {
-                    nowShowing: nowShowing
+                    nowShowing: nowShowing,
+                    lines: prev.lines
                 };
+        });
+    }
+
+    private addLine(line: string) {
+        this.setState((prev, props) => {
+            var lines = prev.lines;
+            lines.push(line);
+            return {
+                nowShowing: prev.nowShowing,
+                lines: lines
+            };
         });
     }
 
@@ -73,6 +85,10 @@ export class App extends React.Component<Interfaces.IAppProps, { nowShowing: str
                         </ul>
                     </div>
                 </nav>
+                <div>
+                    <Editor lineAdded={line => this.addLine(line) } lines={this.state.lines}>
+                    </Editor>
+                </div>
                 {clearButton}
             </div>
         );

@@ -3,6 +3,7 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import { App } from './ui/App'
+import { Editor } from './ui/Editor'
 
 namespace utils {
     export interface ILogger {
@@ -18,7 +19,8 @@ export function main(): void {
     ReactDOM.render(
         <App completedCount={1}
              firstShowing="2"
-             count={1} />,
+             count={1}>
+        </App>,
         document.getElementsByClassName('container')[0]
     );
 }
