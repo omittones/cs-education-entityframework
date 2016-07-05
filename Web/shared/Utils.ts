@@ -1,5 +1,15 @@
 export class Utils {
 
+    // React idiom for shortcutting to `classSet` since it'll be used often
+    //var cx = React.addons.classSet;
+    public static renderClass(object: any): string {
+        for (var prop in object) {
+            if (object[prop] == true) {
+                return prop;
+            }
+        }
+    };
+
     // generates a new Universally unique identify (UUID)
     // the UUID is used to identify each of the tasks
     public static uuid(): string {

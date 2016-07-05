@@ -1,5 +1,12 @@
 namespace Interfaces {
 
+    export interface IAppProps {
+        completedCount: number;
+        onClearCompleted?: any;
+        nowShowing: string;
+        count: number;
+    }
+
     // Defines the interface of the structure of a task
     export interface ITodo {
         id: string,
@@ -24,14 +31,6 @@ namespace Interfaces {
         editText: string
     }
 
-    // Defines the interface of the properties of the Footer component
-    export interface IFooterProps {
-        completedCount: number;
-        onClearCompleted?: any;
-        nowShowing: string;
-        count: number;
-    }
-
     // Defines the TodoModel interface
     export interface ITodoModel {
         key: any;
@@ -45,11 +44,6 @@ namespace Interfaces {
         destroy(todo);
         save(todoToSave, text);
         clearCompleted();
-    }
-
-    // Defines the interface of the properties of the App component
-    export interface IAppProps {
-        model: ITodoModel;
     }
 
     // Defines the interface of the state of the App component

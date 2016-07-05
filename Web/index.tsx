@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
-import { Footer } from './ui/Footer'
+import { App } from './ui/App'
 
 namespace utils {
     export interface ILogger {
@@ -15,12 +15,12 @@ export function main(): void {
     let logger: utils.ILogger = console;
     logger.log('Test method!');
 
-    let model: Interfaces.IFooterProps = { nowShowing: '1', completedCount: 0, count: 0, onClearCompleted: null };
+    let model: Interfaces.IAppProps = { nowShowing: '1', completedCount: 0, count: 0, onClearCompleted: null };
 
     ReactDOM.render(
-        <Footer completedCount={1}
-                nowShowing="2"
-                count={1} />,
-        document.getElementsByClassName('app-container')[0]
+        <App completedCount={1}
+             nowShowing="2"
+             count={1} />,
+        document.getElementsByClassName('container')[0]
     );
 }

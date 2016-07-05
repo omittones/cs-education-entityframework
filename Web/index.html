@@ -1,5 +1,39 @@
 <html>
 <head>
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="./node_modules/materialize-css/dist/css/materialize.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="./css/main.css"  media="screen,projection"/>
+</head>
+<body>
+    <div class="container">
+        <div class="navbar-fixed">
+            <nav>
+                <div class="nav-wrapper">
+                    <span class="brand-logo todo-count">
+                    </span>
+                    <ul class="filters right hide-on-med-and-down">
+                        <li>
+                            <a href="#/">
+                                All
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/active">
+                                Active
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/completed">
+                                Completed
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <script src="./node_modules/jquery/dist/jquery.js"></script>
+    <script src="./node_modules/materialize-css/dist/js/materialize.js"></script>
     <script src="./node_modules/systemjs/dist/system.js"></script>
     <script src="./compiled.js"></script>
     <script>
@@ -16,14 +50,5 @@
         }
       );
     </script>
-</head>
-<body>
-    <div class="app-container">
-        <ul>
-            <li>This</li>
-            <li>is</li>
-            <li>my test project</li>
-        </ul>
-    </div>
 </body>
 </html>
