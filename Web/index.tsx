@@ -15,11 +15,9 @@ export function main(): void {
     let logger: utils.ILogger = console;
     logger.log('Test method!');
 
-    let model: Interfaces.IAppProps = { nowShowing: '1', completedCount: 0, count: 0, onClearCompleted: null };
-
     ReactDOM.render(
         <App completedCount={1}
-             nowShowing="2"
+             firstShowing="2"
              count={1} />,
         document.getElementsByClassName('container')[0]
     );

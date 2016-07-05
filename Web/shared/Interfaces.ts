@@ -3,7 +3,7 @@ namespace Interfaces {
     export interface IAppProps {
         completedCount: number;
         onClearCompleted?: any;
-        nowShowing: string;
+        firstShowing: string;
         count: number;
     }
 

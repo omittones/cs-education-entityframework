@@ -4,13 +4,23 @@ import * as React from 'react'
 
 import { Utils } from '../shared/Utils'
 
-export class App extends React.Component<Interfaces.IAppProps, any> {
+export class App extends React.Component<Interfaces.IAppProps, { nowShowing: string }> {
 
-    private  handleNavClick(button:string):void {
+    constructor(props: Interfaces.IAppProps, context: any) {
+        super(props, context);
+        this.state = {
+            nowShowing: this.props.firstShowing
+        };
+    }
+
+    private handleNavClick(event: React.MouseEvent, nowShowing: string): void {
         this.setState((prev, props) => {
-            debugger;
-
-            return prev;
+            if (prev.nowShowing === nowShowing)
+                return prev;
+            else
+                return {
+                    nowShowing: nowShowing
+                };
         });
     }
 
@@ -30,7 +40,7 @@ export class App extends React.Component<Interfaces.IAppProps, any> {
         }
 
         let cx = Utils.renderClass;
-        let nowShowing: string = this.props.nowShowing;
+        let state = this.state;
         return (
             <div>
                 <nav>
@@ -39,27 +49,24 @@ export class App extends React.Component<Interfaces.IAppProps, any> {
                             <strong>{this.props.count}</strong> {activeTodoWord} left
                         </span>
                         <ul className="filters right hide-on-med-and-down">
-                            <li>
+                            <li className={cx({ active: this.state.nowShowing == '1' }) }>
                                 <a
                                     href="#/"
-                                    className={cx({ active: nowShowing == '1' })}
-                                    onClick={e => this.handleNavClick('1')}>
+                                    onClick={e => this.handleNavClick(e, '1') }>
                                     All
                                 </a>
                             </li>
-                            <li>
+                            <li className={cx({ active: this.state.nowShowing == '2' }) }>
                                 <a
                                     href="#/active"
-                                    className={cx({ active: nowShowing == '2' })}
-                                    onClick={e => this.handleNavClick('2')}>
+                                    onClick={e => this.handleNavClick(e, '2') }>
                                     Active
                                 </a>
                             </li>
-                            <li>
+                            <li className={cx({ active: this.state.nowShowing == '3' }) }>
                                 <a
                                     href="#/completed"
-                                    className={cx({ active: nowShowing == '3' }) }
-                                    onClick={e => this.handleNavClick('3')}>
+                                    onClick={e => this.handleNavClick(e, '3') }>
                                     Completed
                                 </a>
                             </li>
