@@ -1,4 +1,4 @@
-set bin="./node_modules/.bin"
+set bin=./node_modules/.bin
 
 call %bin%/tsc.cmd
 

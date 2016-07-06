@@ -8,6 +8,7 @@
     "factor-bundle": "^2.5.0",
     "lodash": "^4.13.1",
     "materialize-css": "^0.97.6",
+    "onchange": "^2.5.0",
     "react": "^15.2.0",
     "react-dom": "^15.2.0",
     "typescript": "^1.8.10"
