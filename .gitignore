@@ -1,5 +1,6 @@
 *.user
 *.suo
+/.vs
 bin
 obj
 packages
@@ -7,3 +8,6 @@ packages
 /Web/node_modules
 /Web/compiled/*.js
 *.sublime-workspace
+!/Web/bin
+/Web/bin/**
+!/Web/bin/.gitkeep
