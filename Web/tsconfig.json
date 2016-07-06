@@ -1,12 +1,12 @@
 {
     "compileOnSave": true,
     "compilerOptions": {
-        "module": "system",
+        "module": "commonjs",
         "target": "es5",
         "moduleResolution" : "node",
         "inlineSourceMap": true,
         "inlineSources": true,
-        "outFile" : "./compiled.js",
+        "outDir" : "./obj",
         "jsx" : "React"
     },
     "exclude": [

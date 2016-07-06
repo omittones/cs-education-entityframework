@@ -1,5 +1,6 @@
 //<reference path="../shared/Interfaces.ts" />
 import * as React from 'react'
+import * as _ from 'lodash'
 import { Utils } from '../shared/Utils'
 import { Editor } from './Editor'
 
@@ -17,15 +18,16 @@ export class App extends React.Component<Interfaces.IAppProps, { nowShowing: str
         this.setState((prev, props) => {
             if (prev.nowShowing === nowShowing)
                 return prev;
-            else
-                return {
-                    nowShowing: nowShowing,
-                    lines: prev.lines
-                };
+            else {
+                debugger;
+                var obj: any = _.assign({}, prev, { nowShowing: nowShowing });
+                return obj;
+            }
         });
     }
 
     private addLine(line: string) {
+
         this.setState((prev, props) => {
             var lines = prev.lines;
             lines.push(line);
@@ -86,7 +88,7 @@ export class App extends React.Component<Interfaces.IAppProps, { nowShowing: str
                     </div>
                 </nav>
                 <div>
-                    <Editor hideList={false} lineAdded={line => this.addLine(line)} lines={this.state.lines}>
+                    <Editor hideList={false} lineAdded={line => this.addLine(line) } lines={this.state.lines}>
                     </Editor>
                 </div>
                 {clearButton}

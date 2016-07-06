@@ -1,6 +1,7 @@
 //<reference path="../shared/Interfaces.ts" />
 import * as React from 'react'
 import { Utils } from '../shared/Utils'
+import * as _ from 'lodash'
 
 export class Editor extends React.Component<Interfaces.IEditorProps, {}> {
 

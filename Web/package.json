@@ -4,16 +4,16 @@
   "description": "Sample application",
   "main": "index.js",
   "dependencies": {
+    "browserify": "^13.0.1",
+    "factor-bundle": "^2.5.0",
+    "lodash": "^4.13.1",
     "materialize-css": "^0.97.6",
     "react": "^15.2.0",
     "react-dom": "^15.2.0",
-    "systemjs": "^0.19.31",
     "typescript": "^1.8.10"
   },
   "devDependencies": {},
-  "scripts": {
-    "test": "test"
-  },
+  "scripts": {},
   "author": "",
   "license": "ISC"
 }

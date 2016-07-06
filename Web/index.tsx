@@ -11,16 +11,13 @@ namespace utils {
     }
 }
 
-export function main(): void {
+let logger: utils.ILogger = console;
+logger.log('Test method!');
 
-    let logger: utils.ILogger = console;
-    logger.log('Test method!');
-
-    ReactDOM.render(
-        <App completedCount={1}
-             firstShowing="2"
-             count={1}>
-        </App>,
-        document.getElementsByClassName('container')[0]
-    );
-}
+ReactDOM.render(
+    <App completedCount={1}
+         firstShowing="2"
+         count={1}>
+    </App>,
+    document.getElementsByClassName('container')[0]
+);
