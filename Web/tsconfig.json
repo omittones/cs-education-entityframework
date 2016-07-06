@@ -1,7 +1,7 @@
 {
     "compileOnSave": true,
     "compilerOptions": {
-        "module": "system",
+        "module": "commonjs",
         "target": "es5",
         "moduleResolution" : "node",
         "inlineSourceMap": true,
