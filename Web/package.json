@@ -4,6 +4,7 @@
   "description": "Sample application",
   "main": "index.js",
   "dependencies": {
+    "lodash": "^4.13.1",
     "materialize-css": "^0.97.6",
     "react": "^15.2.0",
     "react-dom": "^15.2.0",
