@@ -35,22 +35,7 @@
     </div>
     <script src="./node_modules/jquery/dist/jquery.js"></script>
     <script src="./node_modules/materialize-css/dist/js/materialize.js"></script>
-    <script src="./node_modules/systemjs/dist/system.js"></script>
-    <script src="./compiled.js"></script>
-    <script>
-      System.config({
-        defaultJSExtensions: false,
-        map: {
-          'react': './node_modules/react/dist/react.js',
-          'react-dom': './node_modules/react-dom/dist/react-dom.js',
-          'lodash': './node_modules/lodash'
-        }
-      });
-      System.import('index').then(
-        function(index) {
-          index.main();
-        }
-      );
-    </script>
+    <script src="./bin/common.js"></script>
+    <script src="./bin/index.js"></script>
 </body>
 </html>

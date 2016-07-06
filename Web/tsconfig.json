@@ -6,7 +6,7 @@
         "moduleResolution" : "node",
         "inlineSourceMap": true,
         "inlineSources": true,
-        "outFile" : "./compiled.js",
+        "outDir" : "./obj",
         "jsx" : "React"
     },
     "exclude": [

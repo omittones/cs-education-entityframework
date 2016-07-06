@@ -27,6 +27,7 @@ export class App extends React.Component<Interfaces.IAppProps, { nowShowing: str
     }
 
     private addLine(line: string) {
+
         this.setState((prev, props) => {
             var lines = prev.lines;
             lines.push(line);

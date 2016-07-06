@@ -2,6 +2,7 @@
  "folders": [
   {
    "folder_exclude_patterns": [
+    ".vs",
     "bin",
     "obj",
     "packages"
